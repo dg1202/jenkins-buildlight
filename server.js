@@ -58,18 +58,24 @@ app.post('/buildstatus', function(req, res){
 	  console.log('STARTING JOB '.yellow + job.name);
 
 		 gpio.open(7, "output", function(err){
+		 		console.log(err);
 			  	gpio.write(7,1, function(){
 			  		gpio.close(7);
 			  	});
 			  });
 	
-
-	 
-
+ 
   }else if(job.build.phase == 'COMPLETED'){
   	console.log('JOB COMPLETE '.cyan + job.name);
   }else if(job.build.phase == 'FINISHED'){
   	 trackAllJobs(job);
+
+  	 		 gpio.open(7, "output", function(err){
+		 		console.log(err);
+			  	gpio.write(7,0, function(){
+			  		gpio.close(7);
+			  	});
+			  });
   }
    
 
