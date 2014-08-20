@@ -50,6 +50,7 @@ function trackAllJobs(buildStatus){
  }
 }
 
+
 app.post('/buildstatus', function(req, res){
  console.log('Received Jenkins build notification');
 
@@ -57,25 +58,11 @@ app.post('/buildstatus', function(req, res){
   if(job.build.phase == 'STARTED'){
 	  console.log('STARTING JOB '.yellow + job.name);
 
-		 gpio.open(7, "output", function(err){
-		 		console.log(err);
-			  	gpio.write(7,1, function(){
-			  		gpio.close(7);
-			  	});
-			  });
-	
  
   }else if(job.build.phase == 'COMPLETED'){
   	console.log('JOB COMPLETE '.cyan + job.name);
   }else if(job.build.phase == 'FINISHED'){
   	 trackAllJobs(job);
-
-  	 		 gpio.open(7, "output", function(err){
-		 		console.log(err);
-			  	gpio.write(7,0, function(){
-			  		gpio.close(7);
-			  	});
-			  });
   }
    
 
@@ -93,3 +80,63 @@ app.get('/jobStatus', function(req, res){
 	console.log(jbs);
 	res.json(jbs);
 });
+
+app.get('/green/on', function(req,res){
+	gpio.open(7, "output", function(err){
+		console.log(err);
+		gpio.write(7,1, function(){ //set pin to high
+			gpio.close(7);
+		});
+	});
+});
+
+app.get('/green/off', function(req,res){
+	gpio.open(7, "output", function(err){
+		console.log(err);
+		gpio.write(7,0, function(){ //set pin to low
+			gpio.close(7);
+		});
+	});
+});
+
+
+app.get('/yellow/on', function(req,res){
+	gpio.open(11, "output", function(err){
+		console.log(err);
+		gpio.write(11,1, function(){ 
+			gpio.close(11);
+		});
+	});
+
+});
+
+app.get('/yellow/off', function(req,res){
+	gpio.open(11, "output", function(err){
+		console.log(err);
+		gpio.write(11,0, function(){ 
+			gpio.close(11);
+		});
+	});
+
+});
+
+app.get('/red/on', function(req,res){
+	gpio.open(12, "output", function(err){
+		console.log(err);
+		gpio.write(12,1, function(){ 
+			gpio.close(12);
+		});
+	});
+});
+
+app.get('/red/off', function(req,res){
+	gpio.open(12, "output", function(err){
+		console.log(err);
+		gpio.write(12,0, function(){ 
+			gpio.close(12);
+		});
+	});
+});
+
+
+
