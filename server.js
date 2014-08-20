@@ -1,4 +1,5 @@
 var express = require('express');
+var gpio = require('pi-gpio');
 var colors = require('./node_modules/colors');
 var app = express();
 
@@ -55,6 +56,17 @@ app.post('/buildstatus', function(req, res){
   var job = req.body;
   if(job.build.phase == 'STARTED'){
 	  console.log('STARTING JOB '.yellow + job.name);
+
+	  for(var i=0; i<5; i++){
+		 gpio.open(7, "output", function(err){
+			  	gpio.write(7,1, function(){
+			  		gpio.close(7);
+			  	});
+			  });
+	  }
+
+	 
+
   }else if(job.build.phase == 'COMPLETED'){
   	console.log('JOB COMPLETE '.cyan + job.name);
   }else if(job.build.phase == 'FINISHED'){
