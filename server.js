@@ -57,12 +57,9 @@ app.post('/buildstatus', function(req, res){
   if(job.build.phase == 'STARTED'){
 	  console.log('STARTING JOB '.yellow + job.name);
 
-		 gpio.open(7, "output", function(err){
-		 	console.log(err);
-			  	gpio.write(7,1, function(){
-			  		gpio.close(7);
-			  	});
-			  });
+		gpio.open(7, "output", function(err){
+			  	gpio.write(7,1) //set pin 7 to high
+		});
 	
 
 	 
@@ -71,6 +68,7 @@ app.post('/buildstatus', function(req, res){
   	console.log('JOB COMPLETE '.cyan + job.name);
   }else if(job.build.phase == 'FINISHED'){
   	 trackAllJobs(job);
+  	 gpio.close(7);
   }
    
 
