@@ -57,13 +57,13 @@ app.post('/buildstatus', function(req, res){
   if(job.build.phase == 'STARTED'){
 	  console.log('STARTING JOB '.yellow + job.name);
 
-	  for(var i=0; i<5; i++){
 		 gpio.open(7, "output", function(err){
+		 	console.log(err);
 			  	gpio.write(7,1, function(){
 			  		gpio.close(7);
 			  	});
 			  });
-	  }
+	
 
 	 
 
