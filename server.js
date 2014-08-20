@@ -87,7 +87,7 @@ app.get('/green/on', function(req,res){
 		gpio.write(7,1, function(){ //set pin to high
 			gpio.close(7);
 		    res.write('Pin 7 is set to HIGH');
-
+		    res.end();
 		});
 
 	});
@@ -99,7 +99,7 @@ app.get('/green/off', function(req,res){
 		gpio.write(7,0, function(){ //set pin to low
 			gpio.close(7);
 		    res.write('Pin 7 is set to LOW');
-
+		    res.end();
 		});
 	});
 });
@@ -111,7 +111,7 @@ app.get('/yellow/on', function(req,res){
 		gpio.write(11,1, function(){ 
 			gpio.close(11);
 			res.write('Pin 11 is set to HIGH');
-
+			res.end();
 		});
 	});
 
@@ -123,7 +123,7 @@ app.get('/yellow/off', function(req,res){
 		gpio.write(11,0, function(){ 
 			gpio.close(11);
 			res.write('Pin 11 is set to LOW');
-
+			res.end();
 		});
 	});
 
@@ -135,7 +135,7 @@ app.get('/red/on', function(req,res){
 		gpio.write(12,1, function(){ 
 			gpio.close(12);
 			res.write('Pin 12 is set to HIGH');
-
+		    res.end();
 		});
 	});
 });
@@ -146,7 +146,7 @@ app.get('/red/off', function(req,res){
 		gpio.write(12,0, function(){ 
 			gpio.close(12);
 			res.write('Pin 12 is set to LOW');
-
+			res.end();
 		});
 	});
 });
