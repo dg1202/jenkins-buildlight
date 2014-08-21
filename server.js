@@ -81,7 +81,7 @@ app.get('/jobStatus', function(req, res){
 	res.json(jbs);
 });
 
-app.get('/red/on', function(req,res){
+app.get('/red/off', function(req,res){
 	gpio.open(7, "output", function(err){
 		console.log(err);
 		gpio.write(7,1, function(){ //set pin to high
@@ -93,7 +93,7 @@ app.get('/red/on', function(req,res){
 	});
 });
 
-app.get('/red/off', function(req,res){
+app.get('/red/on', function(req,res){
 	gpio.open(7, "output", function(err){
 		console.log(err);
 		gpio.write(7,0, function(){ //set pin to low
@@ -105,7 +105,7 @@ app.get('/red/off', function(req,res){
 });
 
 
-app.get('/green/on', function(req,res){
+app.get('/green/off', function(req,res){
 	gpio.open(11, "output", function(err){
 		console.log(err);
 		gpio.write(11,1, function(){ 
@@ -117,7 +117,7 @@ app.get('/green/on', function(req,res){
 
 });
 
-app.get('/green/off', function(req,res){
+app.get('/green/on', function(req,res){
 	gpio.open(11, "output", function(err){
 		console.log(err);
 		gpio.write(11,0, function(){ 
@@ -129,7 +129,7 @@ app.get('/green/off', function(req,res){
 
 });
 
-app.get('/yellow/on', function(req,res){
+app.get('/yellow/off', function(req,res){
 	gpio.open(12, "output", function(err){
 		console.log(err);
 		gpio.write(12,1, function(){ 
@@ -140,7 +140,7 @@ app.get('/yellow/on', function(req,res){
 	});
 });
 
-app.get('/yello/off', function(req,res){
+app.get('/yellow/on', function(req,res){
 	gpio.open(12, "output", function(err){
 		console.log(err);
 		gpio.write(12,0, function(){ 
