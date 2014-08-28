@@ -10,7 +10,6 @@ var jenkins = jenkinsapi.init("http://54.245.226.108:8080//");
 function readPin(pinNum){
     try{
         gpio.read(pinNum, function(err, value){
-            if(err) throw err;
             if(value == 0){ //if the pin is on
                 return 'ON';
             }else{
