@@ -146,4 +146,4 @@ function fetchBuilds(){
 }
 
 
-setInterval(fetchBuilds,180000); //fetches build info every 3minutes
+setInterval(fetchBuilds,10000); //fetches build info every 3minutes
