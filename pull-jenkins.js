@@ -24,7 +24,7 @@ function readPin(pinNum){
 }
 
 function yellowON(){
-    var status = readPin(7);
+    var status = '';
     
     if(status != 'ON'){
         gpio.open(7, "output", function(err){
@@ -147,4 +147,4 @@ function fetchBuilds(){
 }
 
 
-setInterval(fetchBuilds,10000); //fetches build info every 3minutes
+setInterval(fetchBuilds,300000); //fetches build info every 5 minutes
