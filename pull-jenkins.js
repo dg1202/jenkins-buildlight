@@ -26,7 +26,7 @@ function readPin(pinNum){
 function yellowON(){
     var status = '';
     
-    if(status != 'ON'){
+    
         gpio.open(7, "output", function(err){
             console.log(err);
             gpio.write(7,0, function(){ //set pin to low
@@ -34,9 +34,7 @@ function yellowON(){
     
             });
         });        
-    }else{
-        console.log('yellow light already on');
-    }
+    
 }
 
 function yellowOFF(){
