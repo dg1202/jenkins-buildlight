@@ -7,15 +7,35 @@ var colors = require('./node_modules/colors');
 
 var jenkins = jenkinsapi.init("http://54.245.226.108:8080//");
 
-function yellowON(){
-    gpio.open(7, "output", function(err){
+function readPin(pinNum){
+    try{
+        gpio.read(pinNum, function(err, value){
+            if(err) throw err;
+            if(value == 0){ //if the pin is on
+                return 'ON';
+            }else{
+                return 'OFF';
+            }
+        })        
+    }catch(err){
         console.log(err);
-        gpio.write(7,0, function(){ //set pin to low
-            gpio.close(7);
-            res.write('Pin 7 is set to LOW');
-            res.end();
-        });
-    });
+    }
+}
+
+function yellowON(){
+    var status = readPin(7);
+    
+    if(status != 'ON'){
+        gpio.open(7, "output", function(err){
+            console.log(err);
+            gpio.write(7,0, function(){ //set pin to low
+                gpio.close(7);
+    
+            });
+        });        
+    }else{
+        console.log('yellow light already on');
+    }
 }
 
 function yellowOFF(){
@@ -23,8 +43,7 @@ function yellowOFF(){
         console.log(err);
         gpio.write(7,1, function(){ //set pin to high
             gpio.close(7);
-            res.write('Pin 7 is set to HIGH');
-            res.end();
+
         });
 
     });
@@ -35,8 +54,7 @@ function greenON(){
         console.log(err);
         gpio.write(11,0, function(){
             gpio.close(11);
-            res.write('Pin 11 is set to LOW');
-            res.end();
+
         });
     });
 }
@@ -47,8 +65,7 @@ function greenOFF(){
         console.log(err);
         gpio.write(11,1, function(){
             gpio.close(11);
-            res.write('Pin 11 is set to HIGH');
-            res.end();
+
         });
     });
 }
@@ -59,8 +76,7 @@ function redON(){
         console.log(err);
         gpio.write(12,0, function(){
             gpio.close(12);
-            res.write('Pin 12 is set to LOW');
-            res.end();
+
         });
     });
 }
@@ -70,8 +86,7 @@ function redOFF(){
         console.log(err);
         gpio.write(12,1, function(){
             gpio.close(12);
-            res.write('Pin 12 is set to HIGH');
-            res.end();
+
         });
     });
 }
@@ -87,16 +102,16 @@ function fetchBuilds(){
         data.map(function(build){
 
            if(build.color == 'blue'){
-               console.log(build.name + ' is Good');
+               console.log(build.name + ' is Good'.green);
                passedBuilds.push(build);
 
            }else if(build.color == 'yellow'){
-               console.log(build.name+' is Unstable');
+               console.log(build.name+' is Unstable'.yellow);
                unstableBuilds.push(build);
 
            }else if(build.color == 'red'){
                console.log('FAILED BUILD!');
-               console.log(build.name+' is broken');
+               console.log(build.name+' is broken'.red);
                failedBuilds.push(build);
            }
         });
@@ -131,4 +146,4 @@ function fetchBuilds(){
 }
 
 
-setInterval(fetchBuilds,10000);
+setInterval(fetchBuilds,180000); //fetches build info every 3minutes
