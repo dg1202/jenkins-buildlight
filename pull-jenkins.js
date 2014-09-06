@@ -5,7 +5,7 @@ var gpio = require('pi-gpio');
 var jenkinsapi = require('jenkins-api');
 var colors = require('./node_modules/colors');
 
-var jenkins = jenkinsapi.init("http://54.245.226.108:8080//");
+var jenkins = jenkinsapi.init("YOUR JENKINS URL:PORT HERE");
 
 function readPin(pinNum){
     try{
